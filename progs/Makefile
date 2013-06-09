@@ -29,9 +29,6 @@ install: all
 	for p in $(PROGS) ; do \
 		install -m 0755 $$p $(SBINDIR) ; \
 	done
-ifeq ($(RAISE_SETFCAP),yes)
-	$(SBINDIR)/setcap cap_setfcap=i $(SBINDIR)/setcap
-endif
 
 clean:
 	$(LOCALCLEAN)

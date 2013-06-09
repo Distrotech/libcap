@@ -50,7 +50,7 @@ $(STALIBNAME): $(OBJS)
 	$(RANLIB) $@
 
 $(MINLIBNAME): $(OBJS)
-	$(LD) $(CFLAGS) $(LDFLAGS) -Wl,-soname,$(MAJLIBNAME) -o $@ $^
+	$(CC) -shared $(CFLAGS) $(LDFLAGS) -o $@ $^
 	ln -sf $(MINLIBNAME) $(MAJLIBNAME)
 	ln -sf $(MAJLIBNAME) $(LIBNAME)
 

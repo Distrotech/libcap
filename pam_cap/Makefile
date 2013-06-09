@@ -17,7 +17,7 @@ install: all
 	install -m 0755 pam_cap.so $(LIBDIR)/security
 
 pam_cap.so: pam_cap.o
-	$(LD) $(LDFLAGS) -o pam_cap.so $< $(LDLIBS)
+	$(CC) -shared $(LDFLAGS) -o pam_cap.so $< $(LDLIBS)
 
 pam_cap.o: pam_cap.c
 	$(CC) $(CFLAGS) $(IPATH) -c $< -o $@

@@ -12,10 +12,6 @@ FAKEROOT=$(DESTDIR)
 # These choices are motivated by the fact that getcap and setcap are
 # administrative operations that could be needed to recover a system.
 
-ifndef lib
-lib=$(shell ldd /usr/bin/ld|fgrep ld-linux|cut -d/ -f2)
-endif
-
 ifdef prefix
 exec_prefix=$(prefix)
 lib_prefix=$(exec_prefix)
@@ -23,10 +19,10 @@ inc_prefix=$(lib_prefix)
 man_prefix=$(prefix)/share
 else
 prefix=/usr
-exec_prefix=
-lib_prefix=$(exec_prefix)
+exec_prefix=$(prefix)
+lib_prefix=$(exec_prefix)/lib
 inc_prefix=$(prefix)
-man_prefix=$(prefix)/share
+man_prefix=$(prefix)/share/man
 endif
 
 # Target directories
@@ -49,7 +45,7 @@ IPATH += -fPIC -I$(topdir)/libcap/include -I$(KERNEL_HEADERS)
 
 CC := gcc
 CFLAGS := -O2 -D_LARGEFILE64_SOURCE -D_FILE_OFFSET_BITS=64
-BUILD_CC := $(CC)
+BUILD_CC := gcc
 BUILD_CFLAGS := $(CFLAGS) $(IPATH)
 AR := ar
 RANLIB := ranlib
